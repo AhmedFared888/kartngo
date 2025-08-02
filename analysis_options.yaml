@@ -26,6 +26,7 @@ linter:
     prefer_const_literals_to_create_immutables: true
     unnecessary_const: true
 
-
+formatter:
+    trailing_commas: preserve
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
