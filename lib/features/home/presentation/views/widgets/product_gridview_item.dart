@@ -20,7 +20,14 @@ class ProductGridViewItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child: Image.asset(AssetsManager.testImage)),
+            SizedBox(
+              height: 185,
+              width: double.infinity,
+              child: Image.asset(
+                AssetsManager.testImage,
+                fit: BoxFit.cover,
+              ),
+            ),
             const SizedBox(height: AppSize.s4),
             Text(
               'Double Whopper',
