@@ -5,7 +5,10 @@ class RoutesManager {
   static const homeView = '/';
   static final router = GoRouter(
     routes: [
-      GoRoute(path: homeView, builder: (context, state) => const HomeView()),
+      GoRoute(
+        path: homeView,
+        builder: (context, state) => const HomeView(),
+      ),
     ],
   );
 }
