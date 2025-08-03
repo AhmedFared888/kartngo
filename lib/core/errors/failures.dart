@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 abstract class Failure {
   final String errMessage;
@@ -19,7 +20,9 @@ class ServerFailure extends Failure {
         return ServerFailure('Receive Timeout with ApiServer');
       case DioExceptionType.badResponse:
         return ServerFailure.fromResponse(
-            dioException.response!.statusCode!, dioException.response!.data);
+          dioException.response!.statusCode!,
+          dioException.response!.data,
+        );
       case DioExceptionType.badCertificate:
         return ServerFailure('badCertificate');
       case DioExceptionType.cancel:
@@ -43,6 +46,19 @@ class ServerFailure extends Failure {
       return ServerFailure('Internal server error, pls try later');
     } else {
       return ServerFailure('Opps there was an error, pls try later');
+    }
+  }
+}
+
+class FirestoreFailure extends Failure {
+  FirestoreFailure(super.errMessage);
+
+  factory FirestoreFailure.fromException(dynamic e) {
+    // تقدر توسع دي حسب الخطأ اللي بيجيلك
+    if (e is FirebaseException) {
+      return FirestoreFailure(e.message ?? 'Unknown Firebase error');
+    } else {
+      return FirestoreFailure(e.toString());
     }
   }
 }
